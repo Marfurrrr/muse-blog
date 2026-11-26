@@ -1,0 +1,26 @@
+# Decap CMS 配置（占位版）
+# 要真正启用管理界面，需要用户提供：
+#   1. 一个 GitHub 仓库（存放博客源码和文章）
+#   2. 一个 GitHub OAuth 应用（用于 Decap 登录）
+# 填好下面的 repo，并配好 OAuth 后，把 backend.name 保持为 github 即可使用。
+# 在此之前，/admin/ 页面只能打开，不能登录。
+backend:
+  name: github
+  repo: USER/REPO # TODO: 填入 GitHub 仓库，例如 marfurrrr/muse-blog
+  branch: main
+  # OAuth 应用配好后，Decap 需要一个 auth 端点；常用方案是部署 netlify-cms-oauth-provider 或用 GitHub App。
+  # base_url: https://your-oauth-provider.example.com
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "posts"
+    label: "文章"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "日期", name: "date", widget: "datetime" }
+      - { label: "正文", name: "body", widget: "markdown" }
